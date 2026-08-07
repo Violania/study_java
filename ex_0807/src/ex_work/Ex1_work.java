@@ -23,7 +23,38 @@ public class Ex1_work {
         2021년은 평년입니다.
         */
 
-        Scanner sc = new Scanner(System.in)
-    }
+        Scanner sc = new Scanner(System.in);
+        System.out.print(" 연도 : ");
+        int year = sc.nextInt();
+/* 
+        if ( year % 4 == 0 && year % 100 != 0) {
+            System.out.println( year + "년은 윤년입니다.");            
+        }else if(year % 100 == 0 && year % 400 == 0){
+            System.out.println( year + "년은 윤년입니다.");  //중복되는 코드 줄여보기         
+        }else{
+            System.out.println( year + "년은 평년입니다.");            
+        }
+        
+        */
+       
+       if ( (year % 4 == 0 && year % 100 != 0) || (year % 100 == 0 && year % 400 == 0) ) {
+           System.out.println( year + "년은 윤년입니다.");                        
+        }else{
+            System.out.println( year + "년은 평년입니다.");            
+        }//다른 방법도 가능함 
+
+        /* 더늘어났네?
+        String leap_year = "년은 윤년입니다";
+        String common_year = "년은 평년입니다";
+        if ( year % 4 == 0 && year % 100 != 0 && year % 400 == 0) {
+            System.out.println( year + leap_year);            
+        }else if(year % 100 == 0 && year % 400 == 0){
+             System.out.println( year + leap_year);  //중복되는 코드 줄여보기         
+        }else{
+                 System.out.println( year + common_year);  
+        }
+             */
+        
+    }//main
     
-}
+}//class

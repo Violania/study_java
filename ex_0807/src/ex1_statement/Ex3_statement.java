@@ -28,12 +28,6 @@ public class Ex3_statement {
         }
         System.out.println( day + "일 후의 잔액은 " + won + "원 입니다.");
 
-
-
-
-        
-
-
     }//main
     
 }
