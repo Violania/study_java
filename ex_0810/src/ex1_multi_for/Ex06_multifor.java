@@ -1,6 +1,6 @@
 package ex1_multi_for;
 
-public class Ex6_multifor {
+public class Ex06_multifor {
     public static void main(String[] args) {
         // *
         // * *
@@ -9,7 +9,7 @@ public class Ex6_multifor {
         // * * * * *
         for (int i = 1; i <= 5; i++) {
             for (int j = 0; j < i; j++) {
-              
+
                 System.out.printf("* ", j);
 
             } // inner

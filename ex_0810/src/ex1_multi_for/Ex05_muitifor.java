@@ -1,6 +1,6 @@
 package ex1_multi_for;
 
-public class Ex5_muitifor {
+public class Ex05_muitifor {
     public static void main(String[] args) {
         
         // 01 02 03 04 05

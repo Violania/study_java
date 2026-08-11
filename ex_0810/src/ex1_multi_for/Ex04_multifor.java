@@ -1,6 +1,6 @@
 package ex1_multi_for;
 
-public class Ex4_multifor {
+public class Ex04_multifor {
     public static void main(String[] args) {
 
         // * * * * *
