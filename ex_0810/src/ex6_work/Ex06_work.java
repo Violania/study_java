@@ -16,17 +16,22 @@ public class Ex06_work {
         System.out.print("입력 : ");
         int num = sc.nextInt();
 
-        for (int i = 1; i <= num; i++) {
-            for (int j = 1; j <= num; j++){
+
+        int n1 = 1;
+        int n2 = 0;
+        int n3 = 0;
+
+        for (int i = 0; i < num; i++) {
+           n2 = n3;
+           n3 = n1;
+           n1 = n2 + n3;
+           System.out.print(n3 + " ");
                 
             }
-           
-           
-           
-           
-            System.out.print(i + " ");
+                     
+            
         }
 
     }
 
-}
+
