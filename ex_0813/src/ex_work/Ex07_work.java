@@ -15,6 +15,7 @@ public class Ex07_work {
          * 
          * /
          */
+/* 
         Scanner sc = new Scanner(System.in);
         System.out.print("홀수 : ");
         int num = sc.nextInt();
@@ -39,6 +40,44 @@ public class Ex07_work {
                 System.out.printf("%02d ", array[i][j]);
             }
 
+            System.out.println();
+        }
+*/        
+
+        Scanner sc1 = new Scanner(System.in);
+        System.out.print("홀수 : ");
+        int size = sc1.nextInt();
+        int[][] square = new int[size][size];
+        int num1 = 1;
+        int y1 = 0; // y축(행)
+        int x1 = 0;// x축(열)
+
+        x1 = size / 2;
+
+        while (num1 <= size * size) {
+            square[y1][x1] = num1;
+            if (num1 % size == 0) {
+                y1++;
+            } else {
+                y1--;
+                x1++;
+            }
+
+            if (y1 < 0)
+                y1 = size - 1;
+
+            if (x1 >= size)
+                x1 = 0;
+
+            num1++;
+        }
+
+        for (int i = 0; i < square.length; i++) {
+            for (int j = 0; j < square[i].length; j++) {
+
+                System.out.printf("%02d ", square[i][j]);
+                
+            }
             System.out.println();
         }
 
