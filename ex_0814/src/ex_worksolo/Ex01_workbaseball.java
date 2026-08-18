@@ -44,8 +44,7 @@ public class Ex01_workbaseball {
         for (int i = 0; i < baseball.length; i++) {
             for (int j = 0; j < baseball.length; j++) {
                
-                if(){}
-                
+                               
             }
             
         }
@@ -55,7 +54,7 @@ public class Ex01_workbaseball {
 
         
         
-        System.out.println(answer);
+    
 
 
 
