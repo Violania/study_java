@@ -18,39 +18,62 @@ public class UpdownMain {
 
         int answer = new Random().nextInt(50) + 1;
         Scanner sc = new Scanner(System.in);
-        int cnt = 1;
-        for (int i = 0; i <= 50; i++) {
-            cnt++;
+        // int cnt = 1;
+        // for (int i = 0; i <= 50; i++) {
+        // cnt++;
+        // System.out.print("정수 : ");
+        // int num = sc.nextInt();
+        // if (num < answer) {
+        // System.out.println("UP");
+        // cnt++;
+
+        // } else if (num > answer) {
+        // System.out.println("DOWN");
+        // cnt++;
+
+        // } else {
+        // System.out.println(cnt + "회 만에 정답");
+        // }
+
+        // // Updownsub ud = new Updownsub();
+        // // int goal = ud.game(answer, num);
+
+        // // if(goal == answer){
+        // // System.out.println(goal);
+        // // break;
+        // }
+
+        // int num = 0;
+        // int cnt = 0;
+
+        // while (num != answer) {
+        // System.out.print("정수 : ");
+        // num = sc.nextInt();
+
+        // if (num < answer) {
+        // System.out.println("UP");
+        // cnt++;
+
+        // } else if (num > answer) {
+        // System.out.println("DOWN");
+        // cnt++;
+        // }
+        // }
+        // System.out.println(cnt + "회 만에 정답");
+
+        int select = 0;
+        boolean check = true;
+
+        Updownsub us = new Updownsub();
+
+        do {
+
             System.out.print("정수 : ");
-            int num = sc.nextInt();
+            select = sc.nextInt();
+            us.check(select);
 
-            Updownsub ud = new Updownsub();
-            int goal = ud.game(answer, num);
-
-            if(goal == answer){
-                System.out.println(goal);
-                break;
-            }
-            
-
-            // int num = 0;
-            // int cnt = 0;
-
-            // while (num != answer) {
-            // System.out.print("정수 : ");
-            // num = sc.nextInt();
-
-            // if (num < answer) {
-            // System.out.println("UP");
-            // cnt++;
-
-            // } else if (num > answer) {
-            // System.out.println("DOWN");
-            // cnt++;
-            // }
-            // }
-            // System.out.println(cnt + "회 만에 정답");
-        }
+        } while (check);
 
     }
+
 }
