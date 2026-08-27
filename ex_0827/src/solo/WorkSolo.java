@@ -1,18 +1,12 @@
-package ex2_fileinput;
+package solo;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 
-public class Ex5_work {
-    public static void main(String[] args) throws IOException{
+public class WorkSolo {
+    public static void main(String[] args) {
 
-        // C:/myfile/work2.txt의 내용을 읽어서
-        // 회문인지 판단하시오
-        // -------------------
-        // 토마토은(는) 회문입니다
-
-        String path = "C:/myfile/work2.txt";
+        String path = "C:/myfile/workSolo.txt";
         File f = new File(path);
         FileInputStream fis = null;
         byte[] read = new byte[(int) f.length()];
@@ -28,16 +22,10 @@ public class Ex5_work {
             StringBuffer sb = new StringBuffer(ori);
             rev = sb.reverse().toString();
 
-            // 원본 문자열을 뒤집어서 rev에 저장
-            // for (int i = ori.length() - 1; i >= 0; i--) {
-
-            // rev += ori.charAt(i);
-            // }
-
             if (ori.equals(rev)) {
-                System.out.println(ori + "은(는) 회문");
+                System.out.println(ori + "은(는) 회문입니다");
             } else {
-                System.out.println(ori + "은(는) 안회문");
+                System.out.println(ori + "은(는) 회문이 아닙니다");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,10 +35,11 @@ public class Ex5_work {
                 if (fis != null) {
                     fis.close();
                 }
+
             } catch (Exception e) {
                 // TODO: handle exception
-            
             }
+
         }
 
     }
