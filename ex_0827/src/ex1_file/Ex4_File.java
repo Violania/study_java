@@ -1,0 +1,19 @@
+package ex1_file;
+
+import java.io.File;
+
+public class Ex4_File {
+    public static void main(String[] args) {
+        
+        String path = "c:/myflie/abc";
+        File f =new File(path);
+
+        //f가 참조하고 있는 경로가 물리적으로 존재하지 않을 때
+        //mkdir은 하나만 생성가능
+        if (!f.exists()) {
+            System.out.println("폴더를 생성합니다");  
+            f.mkdirs();
+        }
+    }
+
+}

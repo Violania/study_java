@@ -1,0 +1,44 @@
+1.자바 (1개월) -------------------------->끝까지 사용(가장 기본이고 중요 한달 간 집중)
+2.미니프로젝트 (1주) 팀단위
+3.웹표준(2주)
+4.데이터베이스 (2주) 연습 오라클 실전isqb
+5.리엑트(1주)   -----aws 배포
+6.1차 프로젝트 (1개월) -----
+7.jsp(1개월)
+8.스프링(2주)
+9.스프링부트(1주)--aws
+10.파이널 프로젝트(2개월)
+
+수업영상-naver.me/GSQFQoY4
+
+자료공유 ip  \\192.168.0.46
+자바 11 naver.me/G58IptwG
+ide https://cursor.com/
+
+
+8/5
+커서 터미널 실행은 ctrl+F5 저장은 ctrl s
+클래스 첫문자는 대문자 무조건
+클래스는 기능적 세분화
+
+https://github.com/Violania/study_java
+git remote add orgin https://github.com/Violania/study_java.git
+
+
+자바 배쉬 단계
+
+1) git config --global user.name "Violania"
+2) git config --global user.email "akizora111@naver.com"
+
+1. git init
+2. git add ./ex_0806
+3. git commit -m "0806 수업내용"
+4. git remote add origin https://github.com/j6y5h7/study_java.git
+5. git remote set-url origin https://github.com/j6y5h7/study_java.git
+6. git push -u origin master --force
+
+
+내용이 변경되면 2 3 6순서
+
+
+art shft f 줄맞춤 전체선택 ctrl a
