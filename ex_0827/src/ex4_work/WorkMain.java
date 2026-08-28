@@ -29,8 +29,10 @@ public class WorkMain {
                 fis.read(read);
                 String res = new String(read);
 
+                //char s = input.charAt(0):
+
                 for (int i = 0; i < res.length(); i++) {
-                    if (str.equals(String.valueOf(res.charAt(i)))) {
+                    if (str.equals(String.valueOf(res.charAt(i)))) {//(s == read.charAt(i))
                         cnt++;
                     } // if
                 } // for
