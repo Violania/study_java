@@ -3,8 +3,6 @@ package ex4_homework_srp;
 import java.util.Random;
 import java.util.Scanner;
 
-
-
 public class Homework {
     public static void main(String[] args) {
         // 아이디를 입력하세요 : aaa
@@ -24,48 +22,78 @@ public class Homework {
         // 1승, 0패, 0무
         // 가위(s) | 바위(r) | 보(p) ? : p
 
-        //스트링 사용
+        // 스트링 사용
 
         Scanner sc = new Scanner(System.in);
         User user = new User();
         System.out.print("아이디를 입력하세요 : ");
         String id = sc.next();
 
-        if(!id.equals(user.getId())){
-            UserWriter uw =new UserWriter();
+        if (!id.equals(user.getId())) {
+            UserWriter uw = new UserWriter();
             uw.writeInfo(user);
-        }else{
-           UserLorder ul = new UserLorder();
-           user = ul.loadinfo(id);
+        } else {
+            UserLorder ul = new UserLorder();
+            user = ul.loadInfo(id);
 
-           if(user != null){
-            System.out.printf("%d승 %d무 %d패\n",user.getWin(),user.getDraw(),user.getLose());
-           }
+            if (user != null) {
+                System.out.printf("%d승 %d무 %d패\n", user.getWin(), user.getDraw(), user.getLose());
+            }
 
-        }//if
+        } // if
 
         Random rnd = new Random();
-        String [] qrcp = {"S","r","p"};
+        String[] qrsp = { "S", "r", "p" };
         System.out.println("가위(s) | 바위(r) | 보(p) ? : ");
-        String rcp = sc.next();
+        String rsp = sc.next();
 
         boolean yn = true;
         while (true) {
             int num = rnd.nextInt(3);
 
-            switch (qrcp[num]) {
+            switch (qrsp[num]) {
                 case "s":
-                    
+
+                    if (rsp.equals("s")) {
+                        System.out.println("비겼습니다");
+                        user.setDraw(+1);
+                    } else if (rsp.equals("r")) {
+                        System.out.println("졌습니다");
+                        user.setLose(+1);
+                    } else if (rsp.equals("p")) {
+                        System.out.println("이겼습니다");
+                        user.setWin(+1);
+                    }
                     break;
-            
-                default:
+                case "r":
+
+                    if (rsp.equals("s")) {
+                        System.out.println("졌습니다");
+                        user.setLose(+1);
+                    } else if (rsp.equals("r")) {
+                        System.out.println("비겼습니다");
+                        user.setDraw(+1);
+                    } else if (rsp.equals("p")) {
+                        System.out.println("이겼습니다");
+                        user.setWin(+1);
+                    }
                     break;
+                case "p":
+
+                    if (rsp.equals("p")) {
+                        System.out.println("비겼습니다");
+                        user.setDraw(+1);
+                    } else if (rsp.equals("r")) {
+                        System.out.println("졌습니다");
+                        user.setLose(+1);
+                    } else if (rsp.equals("s")) {
+                        System.out.println("이겼습니다");
+                        user.setWin(+1);
+                    }
+                    break;
+
             }
         }
 
-
-
-
-
-    }//main
-}//class
+    }// main
+}// class

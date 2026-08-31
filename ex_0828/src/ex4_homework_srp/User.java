@@ -5,10 +5,8 @@ import java.io.Serializable;
 public class User implements Serializable{
 
     private String id;
-    private int win;
-    private int draw;
-    private int lose;
-
+    private int win,draw,lose;
+   
     public String getId() {
         return id;
     }

@@ -1,5 +1,7 @@
 package ex5_homework2_hangman;
 
+import java.util.Random;
+
 public class HangMain {
     public static void main(String[] args) {
 //         *** HangMan ***
@@ -15,5 +17,13 @@ public class HangMain {
 // Word : app☆e >> l
 // apple 정답
 // 7회 만에 정답
+
+    String [] word = {"apple","game"};
+
+    int rnd = new Random().nextInt(word.length);
+
+    PlayGame pg = new PlayGame();
+    pg.play(word[rnd]);
+
     }
 }

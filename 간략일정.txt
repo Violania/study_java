@@ -31,8 +31,8 @@ git remote add orgin https://github.com/Violania/study_java.git
 2) git config --global user.email "akizora111@naver.com"
 
 1. git init
-2. git add ./ex_0806
-3. git commit -m "0806 수업내용"
+2. git add ./ex_0827
+3. git commit -m "08 수업내용"
 4. git remote add origin https://github.com/j6y5h7/study_java.git
 5. git remote set-url origin https://github.com/j6y5h7/study_java.git
 6. git push -u origin master --force

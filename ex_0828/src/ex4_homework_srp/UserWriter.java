@@ -11,8 +11,8 @@ public class UserWriter {
 
     public void writeInfo(User user){
 
-        String path = "C:/myfile/RCPUser/" + user.getId() + "/save.sav";
-        File dir1 = new File("C:/myfile/RCPUser/");
+        String path = "C:/myfile/RSPUser/" + user.getId() + "/save.sav";
+        File dir1 = new File("C:/myfile/RSPUser/");
         
         if (!dir1.exists()) {
             dir1.mkdirs();
