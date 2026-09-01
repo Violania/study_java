@@ -1,4 +1,4 @@
-package ex4_homework_srp;
+package rsp;
 
 import java.io.Serializable;
 

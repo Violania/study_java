@@ -23,29 +23,29 @@ public class UserWriter {
         if (!dir2.exists()) {
             dir2.mkdirs();
         }
-        try {
-
-            fos = new FileOutputStream(path);
-            oos = new ObjectOutputStream(fos);
-
-            // user객체를 통째로 저장
-            oos.writeObject(user);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("유저정보 저장 실패");
-        } finally {
-
             try {
-                if (oos != null)
-                    oos.close();
 
-                if (fos != null)
-                    fos.close();
+                fos = new FileOutputStream(path);
+                oos = new ObjectOutputStream(fos);
+
+                
+                oos.writeObject(user);
 
             } catch (Exception e) {
-                // TODO: handle exception
+                e.printStackTrace();
+                System.out.println("유저정보 저장 실패");
+            } finally {
+
+                try {
+                    if (oos != null)
+                        oos.close();
+
+                    if (fos != null)
+                        fos.close();
+
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
             }
-        }
     }
 }

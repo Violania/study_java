@@ -54,7 +54,7 @@ public class PlayGame {
                 }
 
                 // 게임종료
-                if(!isPlaying){
+                if (!isPlaying) {
                     System.out.println("정답. 게임종료");
                     break;
                 }

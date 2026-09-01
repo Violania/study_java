@@ -22,7 +22,7 @@ public class FrameMain {
                 f1.setLayout(null);
                 f1.setBounds(500, 190, 400, 220);
                 f1.setFont(font);
-                f1.setBackground(Color.BLUE);
+                f1.setBackground(Color.GRAY);
 
                 Label q = new Label("종료할까요?");
                 q.setBounds(140, 60, 300, 50);
@@ -35,8 +35,17 @@ public class FrameMain {
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         System.exit(0);
                     }
-
+                    
                 };
+
+                // switch (e.getActionCommand()) {
+                //     case "네":
+                //         System.exit(0);                    
+                //         break;
+                //     case "아니요":
+                //         f1.dispose();
+                //         break;
+                // }
 
                 Button btn2 = new Button("아니요");
                 btn2.setBounds(230, 130, 110, 50);
@@ -49,12 +58,15 @@ public class FrameMain {
                 });
 
                 btn1.addActionListener(act);
+                //btn2.addActionListener(act); 이경우 스위치문으로 제어가능 e.getActionCommand()
+
+                
 
                 f1.setVisible(true);
 
+                f1.add(q);
                 f1.add(btn1);
                 f1.add(btn2);
-                f1.add(q);
             }
         });
         f.setVisible(true);
