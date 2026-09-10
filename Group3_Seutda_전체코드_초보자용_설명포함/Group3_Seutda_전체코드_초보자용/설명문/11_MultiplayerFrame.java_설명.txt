@@ -1,0 +1,39 @@
+[MultiplayerFrame.java 설명]
+
+1. 이 파일의 역할
+- 멀티플레이 대기실과 실제 게임 화면을 보여줍니다.
+- SeutdaClient가 받은 서버 상태를 화면으로 바꾸는 역할입니다.
+
+2. 왜 SeutdaClient.Listener를 implements했는가
+- 서버에서 메시지가 왔을 때 화면이 바로 반응할 수 있게 하기 위해서입니다.
+- onWelcome, onLobby, onState, onLog, onResult, onError, onDisconnected로 상황을 나눴습니다.
+
+3. 주요 메서드
+- actionPerformed(): 콜/다이/더블/올인/게임 시작/다음 라운드 버튼을 서버 명령으로 바꿉니다.
+- connectToServer(): 서버 접속을 별도 Thread에서 실행합니다.
+- onWelcome(): 내 접속 ID와 호스트 여부를 받습니다.
+- onLobby(): 대기실 인원 목록을 표시합니다.
+- onState(): 서버가 보낸 현재 게임 상태를 저장하고 화면을 갱신합니다.
+- onLog(): 진행 기록을 로그창에 추가합니다.
+- onResult(): 라운드 결과와 전적을 저장합니다.
+- onError(): 서버 오류를 화면에 표시합니다.
+- onDisconnected(): 연결이 끊겼을 때 버튼을 비활성화합니다.
+- showLobby(): 대기실 화면을 만듭니다.
+- showWaitingPanel(): 연결 중 화면을 표시합니다.
+- renderTable(): 서버 상태로 실제 게임 테이블을 다시 그립니다.
+- makePlayerPanel(): 플레이어 한 명의 카드와 돈을 표시합니다.
+- findMyPlayerState(): 서버 상태 목록에서 내 정보를 찾습니다.
+- formatMoney(): 금액 표시를 공통 처리합니다.
+- getCardImagePath(), loadImage(): 카드 이미지 경로 생성과 파일 읽기를 담당합니다.
+- setActionButtons(): 내 차례일 때만 행동 버튼을 사용하게 합니다.
+
+4. EventQueue.invokeLater가 필요한 이유
+- 네트워크 Thread에서 직접 AWT 화면을 바꾸지 않고 화면 이벤트 Thread에서 안전하게 변경하기 위해 사용합니다.
+- 람다식 대신 일반 Runnable 클래스로 작성했습니다.
+
+5. NetworkCardView 내부 클래스
+- 서버가 공개 허용한 카드만 앞면으로 그리고 나머지는 뒷면으로 그립니다.
+- 멀티플레이 카드 표현 전용이라 MultiplayerFrame 내부에 두었습니다.
+
+6. 발표할 때 한 문장
+"MultiplayerFrame.java는 서버에서 받은 게임 상태를 실제 카드와 버튼 화면으로 보여주는 멀티플레이 UI 파일입니다."

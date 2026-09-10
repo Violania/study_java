@@ -1,0 +1,50 @@
+[Game.java 설명]
+
+1. 이 파일의 역할
+- 혼자 하기 모드의 실제 게임 규칙을 담당합니다.
+- 카드 분배, 입장료, 베팅 차례, AI 행동, 다이/콜/더블/올인, 승패 판정, 재경기를 계산합니다.
+- 화면을 직접 그리지 않고 계산 결과만 GameFrame에 알려줍니다.
+
+2. 왜 화면과 게임 규칙을 분리했는가
+- GameFrame은 화면 담당, Game은 규칙 담당으로 나누면 한 파일에서 UI와 계산이 섞이지 않습니다.
+- 게임 규칙을 수정할 때 화면 코드까지 건드릴 필요가 줄어듭니다.
+
+3. 주요 흐름
+initGame()
+  -> startNewRound()
+  -> processNextBetTurn()
+  -> 사람은 humanAction(), AI는 processAiAction()
+  -> doAction()
+  -> 다음 차례
+  -> 4차 베팅 종료
+  -> finishRound()
+
+4. 주요 메서드를 쓴 이유
+- initGame(): 플레이어 4명을 준비하고 처음 게임을 시작합니다.
+- startNewRound(): 입장료, 카드 분배, 베팅 초기값을 한 번에 준비합니다.
+- processNextBetTurn(): 지금 행동할 플레이어를 찾습니다.
+- checkSinglePlayerWin(): 다른 사람이 모두 다이했다면 카드를 비교하지 않고 기권승으로 끝냅니다.
+- moveToNextBetPhase(): 1~4차 베팅 단계를 이동합니다.
+- startAiTurn(): AI가 즉시 행동하지 않고 잠깐 생각하는 것처럼 보이게 Thread를 사용합니다.
+- chooseAiAction(): AI 카드 점수와 랜덤 값을 이용해 콜/다이/더블/올인을 고릅니다.
+- humanAction(): 사람이 누른 버튼 번호를 게임 로직에 전달합니다.
+- doAction(): 사람과 AI의 공통 행동 시작점입니다.
+- processFold(), processAllIn(), processDouble(), processCall(): 한 메서드에 모든 베팅 코드를 몰지 않고 행동별로 나눠 초보자가 읽기 쉽게 만들었습니다.
+- getMaxOpponentCapacity(): 한 사람이 상대가 낼 수 있는 금액 이상으로 과도하게 베팅하는 것을 조정합니다.
+- finishRound(): 살아남은 플레이어의 족보를 비교하고 상금을 나눕니다.
+- handName(): 암행어사, 땡잡이, 구사처럼 조건에 따라 실제 표시되는 족보 이름을 정합니다.
+- removeBrokePlayers(): 돈이 0원이 된 플레이어를 탈락 처리합니다.
+- formatMoney(): 여러 곳에서 반복되는 금액 표시를 한 메서드로 묶었습니다.
+- status(): 화면에 상태 문구를 보내는 공통 메서드입니다.
+
+5. GameEventListener를 쓴 이유
+- Game이 GameFrame의 Label이나 Button을 직접 만지지 않고
+  "상태가 바뀌었다", "라운드가 끝났다"는 사실만 알려주기 위해 사용합니다.
+- 이렇게 하면 게임 계산과 화면 출력 역할이 분리됩니다.
+
+6. Thread가 있는 이유
+- AI 행동 전에 0.5초를 기다리게 하기 위해 사용합니다.
+- 화면을 그대로 멈추게 하면 창이 굳어 보이기 때문에 별도 Thread에서 기다립니다.
+
+7. 발표할 때 한 문장
+"Game.java는 싱글플레이의 핵심 로직 파일로, 화면과 분리해서 카드 분배부터 베팅과 승패 판정까지 계산합니다."

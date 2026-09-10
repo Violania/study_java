@@ -1,0 +1,77 @@
+[SeutdaServer.java 설명]
+
+1. 이 파일의 역할
+- 멀티플레이 게임의 중심 서버입니다.
+- 접속한 사람을 관리하고 카드, 돈, 팟, 베팅 차례, 승패를 서버에서 한 번만 계산합니다.
+- 계산된 같은 상태를 모든 클라이언트에게 전송합니다.
+
+2. 왜 서버에서 게임을 계산하는가
+- 각 컴퓨터가 따로 계산하면 카드나 돈 상태가 서로 달라질 수 있습니다.
+- 서버 하나를 기준으로 정하면 모든 플레이어가 같은 결과를 보게 됩니다.
+
+3. 서버 전체 흐름
+start()
+  -> acceptLoop()에서 접속 기다림
+  -> ClientHandler가 플레이어 한 명의 연결 담당
+  -> joined()로 대기실 등록
+  -> 호스트가 START 전송
+  -> GameSession 생성
+  -> action()으로 베팅 처리
+  -> broadcastState()로 모든 화면에 상태 전송
+
+4. 서버 바깥쪽 주요 메서드
+- start(): ServerSocket을 열고 접속 대기 Thread를 시작합니다.
+- stop(): 서버와 연결된 클라이언트를 닫습니다.
+- acceptLoop(): 새로운 Socket 접속을 계속 기다립니다.
+- joined(): 접속한 사람을 클라이언트 목록에 넣습니다.
+- recomputeHostLocked(): 가장 먼저 들어온 사람을 호스트로 정합니다.
+- sendHostFlags(): 각 사람에게 자신이 호스트인지 다시 알려줍니다.
+- uniqueName(): 같은 닉네임이 있으면 숫자를 붙여 중복을 피합니다.
+- handleCommand(): START, ACTION, NEXT 명령을 구분합니다.
+- startGame(): 호스트인지, 최소 2명인지 확인하고 게임을 시작합니다.
+- disconnected(): 연결이 끊긴 플레이어를 목록이나 게임에서 제외합니다.
+- broadcastLobby(): 대기실 명단을 모두에게 보냅니다.
+- broadcastLog(): 진행 로그를 모두에게 보냅니다.
+- broadcastResult(): 라운드 결과를 모두에게 보냅니다.
+- broadcastState(): 현재 카드/돈/차례/팟 상태를 플레이어별 공개 범위에 맞게 보냅니다.
+- cleanName(): 닉네임의 탭/줄바꿈을 제거하고 길이를 제한합니다.
+- getLocalIpAddress(): 같은 공유기에서 접속할 때 사용할 호스트 IPv4 주소를 찾습니다.
+
+5. GameSession 내부 클래스
+- 실제 멀티플레이 게임 한 판의 규칙과 상태를 저장합니다.
+- startFirstRound(): 첫 라운드 시작
+- nextRound(): 다음 라운드 시작
+- startRound(): 카드, 입장료, 선 플레이어, 베팅 값을 초기화
+- action(): 현재 플레이어의 콜/다이/더블/올인을 처리
+- disconnect(): 게임 중 연결이 끊긴 플레이어 처리
+- finishPhaseOrRound(): 다음 베팅 단계 또는 최종 승부로 이동
+- fillPendingForPhase(): 이번 베팅 단계에서 행동해야 할 사람을 준비
+- canAct(): 해당 플레이어가 행동 가능한지 확인
+- wrapIndex(): 배열 끝을 넘어가면 다시 처음 인덱스로 돌아오게 함
+- findNextPending(): 다음 차례 플레이어를 찾음
+- findFirstRoundPlayer(): 라운드의 선 플레이어를 찾음
+- announceTurn(): 현재 차례를 로그로 알림
+- finishByFold(): 한 명만 남은 기권승 처리
+- finishShowdown(): 카드 족보 비교 후 승자/동점/재경기 처리
+- displayRank(): 특수 족보가 실제로 발동하는 상황인지 확인
+- finishWholeGame(): 최종 한 명이 남으면 전체 게임 종료
+- countActive(), countRoundPlayers(), countAlive(): 플레이어 수를 상황별로 계산
+- alivePlayers(): 현재 승부에 남은 사람 목록 반환
+- indexOf(): 특정 클라이언트가 몇 번째 플레이어인지 찾음
+- currentTurnId(): 현재 차례 플레이어의 접속 ID 반환
+- money(): 금액을 보기 좋은 문자열로 바꿈
+
+6. ClientHandler 내부 클래스
+- 접속한 플레이어 한 명마다 하나씩 생성됩니다.
+- run(): 처음 JOIN 메시지를 받고 이후 명령을 계속 읽습니다.
+- send(): 그 플레이어에게 메시지를 보냅니다.
+- close(): 해당 Socket을 닫습니다.
+
+7. synchronized / volatile / Thread가 필요한 이유
+- 서버는 여러 플레이어가 동시에 접속하고 메시지를 보낼 수 있습니다.
+- 같은 리스트나 게임 상태를 동시에 수정하면 순서가 꼬일 수 있으므로 synchronized를 사용합니다.
+- running, gameStarted, closed처럼 여러 Thread에서 확인하는 상태는 volatile을 사용합니다.
+- 이 코드는 멀티플레이를 유지하려면 필요한 부분이라 삭제하지 않았습니다.
+
+8. 발표할 때 한 문장
+"SeutdaServer.java는 멀티플레이의 기준이 되는 파일로, 모든 플레이어의 접속과 게임 상태를 한 곳에서 계산해 같은 결과를 전송합니다."

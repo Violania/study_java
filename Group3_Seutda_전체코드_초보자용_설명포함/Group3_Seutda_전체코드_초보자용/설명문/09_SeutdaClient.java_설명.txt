@@ -1,0 +1,38 @@
+[SeutdaClient.java 설명]
+
+1. 이 파일의 역할
+- 멀티플레이에서 내 컴퓨터와 서버를 연결하는 통신 담당 파일입니다.
+- 서버에 명령을 보내고 서버가 보내준 상태 메시지를 읽습니다.
+
+2. 왜 화면과 네트워크를 분리했는가
+- MultiplayerFrame에 Socket 코드까지 넣으면 화면 코드가 너무 복잡해집니다.
+- SeutdaClient는 통신만 담당하고 화면은 Listener를 통해 결과만 받습니다.
+
+3. 주요 메서드
+- connect(): 서버 IP와 포트로 Socket을 연결하고 JOIN 메시지를 보냅니다.
+- startGame(): START 명령을 보냅니다.
+- sendAction(): ACTION과 행동 번호를 보냅니다.
+- nextRound(): NEXT 명령을 보냅니다.
+- close(): 서버 연결을 닫습니다.
+- send(): 실제 문자열을 서버로 전송하는 공통 메서드입니다.
+- readLoop(): 서버 메시지를 계속 한 줄씩 읽습니다.
+- parse(): 메시지의 첫 단어를 보고 WELCOME, HOST, LOBBY, STATE, LOG, RESULT, ERROR로 구분합니다.
+- parseWelcome(), parseHost(), parseLobby(), parseLog(), parseResult(), parseError(): 메시지 종류별로 나눠 처리합니다.
+- parseState(): 서버가 보낸 전체 게임 상태를 GameState 객체에 저장합니다.
+- parsePlayerState(): 플레이어 한 명의 문자열을 PlayerState로 바꿉니다.
+- encode(), decode(): 탭이나 한글이 네트워크 메시지 구분을 방해하지 않도록 Base64 문자열로 바꿉니다.
+
+4. Listener를 쓴 이유
+- 네트워크 파일이 Label이나 Button을 직접 조작하지 않고 MultiplayerFrame에 결과를 알려주기 위해서입니다.
+
+5. volatile / synchronized가 남아 있는 이유
+- 네트워크는 여러 Thread가 같은 연결 상태와 출력 객체를 사용할 수 있습니다.
+- 동시에 값을 바꾸면서 생기는 오류를 줄이기 위해 필요한 부분에만 사용했습니다.
+- 이 부분은 멀티플레이 기능 때문에 필요한 Java 동시성 기능이며 축약 문법이 아닙니다.
+
+6. Base64에 대한 설명
+- Base64는 암호화가 아닙니다.
+- 한글과 특수문자를 네트워크에서 안전하게 한 덩어리 문자열로 보내기 위해 사용했습니다.
+
+7. 발표할 때 한 문장
+"SeutdaClient.java는 서버와 Socket으로 연결하고, 명령을 보내거나 서버 상태를 받아 화면에 전달하는 클라이언트 통신 파일입니다."

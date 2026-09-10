@@ -1,0 +1,38 @@
+Group 3 섯다 - 전체 코드 초보자용 수정사항
+======================================
+
+1. 삼항연산자(?:) 제거
+- 조건을 if / else로 풀어서 어떤 경우에 어떤 값이 들어가는지 바로 보이게 했습니다.
+
+2. 람다식/Stream/메서드 참조 제거
+- 발표자가 문법 자체를 설명해야 하는 부담을 줄였습니다.
+
+3. Card.java
+- ordinal()/values() 같은 enum 순서 계산을 사용하지 않고 switch문으로 족보를 찾습니다.
+
+4. Game.java
+- 사람과 AI의 공통 베팅 흐름은 유지했습니다.
+- 실제 행동은 processFold(), processCall(), processDouble(), processAllIn()으로 나눴습니다.
+- AI 선택은 chooseAiAction()에서 if문으로 단계별 판단합니다.
+
+5. SeutdaClient.java
+- 서버 메시지를 한 메서드에서 모두 처리하지 않고
+  parseWelcome(), parseLobby(), parseState(), parseResult() 등으로 분리했습니다.
+- while문 안에서 값을 동시에 대입하는 축약 형태를 일반적인 반복문으로 바꿨습니다.
+
+6. SeutdaServer.java
+- 삼항연산자, 한 줄 조건 처리, Math.floorMod 직접 사용을 단순한 if문과 wrapIndex() 메서드로 바꿨습니다.
+- 수정 흔적 형태의 주석은 제거했습니다.
+- 멀티플레이에 꼭 필요한 synchronized, volatile, Thread, Socket은 유지했습니다.
+
+7. GameFrame.java / MultiplayerFrame.java
+- 금액 표시와 카드 이미지 경로 생성을 이름 있는 메서드로 분리했습니다.
+- 플레이어 상태를 삼항연산자로 조합하지 않고 일반 if문으로 처리합니다.
+
+8. MainTest.java
+- 한 줄 if문 대신 중괄호를 사용해 실패 조건을 명확히 보이게 했습니다.
+
+검증
+- 전체 Java 소스 컴파일 성공
+- MainTest 기본 족보 테스트 통과
+- SeutdaServer 포트 9999 정상 기동 확인
