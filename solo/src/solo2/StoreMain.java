@@ -29,5 +29,41 @@ public class StoreMain {
 
         ArrayList<Product> products = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("1.상품 목록\n2.상품 구매\n3.상품 추가\n4.종 료\n선택 : \n");
+            int num = sc.nextInt();
+
+            switch (num) {
+                case 1:
+                    System.out.println("===입금액===");
+                    System.out.print("입금액 : ");
+                    cash = sc.nextInt();
+
+                    a1.deposit(cash);
+                    break;
+
+                case 2:
+                    System.out.println("===출금액===");
+                    System.err.print("출금액 : ");
+                    cash = sc.nextInt();
+
+                    a1.wihtdrawal(cash);
+                    break;
+
+                case 3:
+                    System.out.println("===잔액확인===");
+                    a1.checkbalance();
+                    break;
+
+                default:
+                    System.out.println("atm사용을 종료합니다");
+                    return; //void에서 사용시 여기서 마지막을 의미함
+
+            }
+            System.out.println("-----------------");
+        }     
+                       
+    }
     }
 }
