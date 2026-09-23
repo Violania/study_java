@@ -33,37 +33,35 @@ public class StoreMain {
         while (true) {
             System.out.print("1.상품 목록\n2.상품 구매\n3.상품 추가\n4.종 료\n선택 : \n");
             int num = sc.nextInt();
+            sc.nextInt();
 
             switch (num) {
                 case 1:
-                    System.out.println("===입금액===");
-                    System.out.print("입금액 : ");
-                    cash = sc.nextInt();
-
-                    a1.deposit(cash);
+                    System.out.println("상품  목록");
+                    ShowList sl =new ShowList();
+                    sl.showList(products);
                     break;
 
                 case 2:
-                    System.out.println("===출금액===");
-                    System.err.print("출금액 : ");
-                    cash = sc.nextInt();
-
-                    a1.wihtdrawal(cash);
+                    System.out.println("상품 구매");
+                    BuyGoods bg = new BuyGoods();
+                    bg.buyGoods(products, num, num);
                     break;
 
                 case 3:
-                    System.out.println("===잔액확인===");
-                    a1.checkbalance();
+                    System.out.println("상품 추가");
+                    AddGoods ag =new AddGoods().
+                    ag.addGoods(products);
                     break;
 
-                default:
-                    System.out.println("atm사용을 종료합니다");
-                    return; //void에서 사용시 여기서 마지막을 의미함
+                case 4:
+                    System.out.println("종료합니다");
+                    return; 
 
             }
             System.out.println("-----------------");
         }     
                        
     }
-    }
+    
 }
